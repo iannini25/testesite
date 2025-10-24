@@ -675,3 +675,87 @@
         height: 30px;
     }
 }
+
+/* ===== HERO: refinamentos para mobile 430px ===== */
+@media (max-width: 430px){
+
+  /* respeita o notch do iOS no header fixo */
+  .site-header.brand-only{
+    padding-top: calc(10px + env(safe-area-inset-top));
+    padding-right: 14px;
+    padding-bottom: 10px;
+    padding-left: 14px;
+  }
+
+  /* escurece sutilmente o fundo atrás do texto para leitura */
+  .hero{
+    min-height: 92vh;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg,
+      rgba(10,10,10,0.65) 0%,
+      rgba(10,10,10,0.35) 32%,
+      rgba(10,10,10,0.6) 100%);
+    pointer-events:none;
+  }
+
+  .hero-bg{ opacity:.32; transform: scale(1.06); }
+
+  /* painel “glass” só no mobile para agrupar h1+p+CTAs */
+  .hero-panel{
+    position: relative;
+    max-width: 100%;
+    padding: 14px 14px 16px;
+    border-radius: 16px;
+    background: rgba(15,15,15,0.45);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(8px) saturate(120%);
+    box-shadow: 0 8px 28px rgba(0,0,0,.28);
+  }
+
+  /* tipografia do h1 enxuta e sem stroke pesado */
+  .hero-panel h1{
+    margin: 0 0 8px;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    font-size: clamp(1.8rem, 7.4vw, 2.2rem);
+    max-width: 20ch;     /* força 2–3 linhas limpas */
+  }
+  .hero-panel h1 .stroke{
+    color: var(--fg);
+    -webkit-text-stroke: 0; /* remove contorno no mobile */
+  }
+
+  .hero-sub{
+    margin: 8px 0 12px;
+    max-width: 100%;
+    font-size: .98rem;
+    color: #d6d6d6;
+  }
+
+  .hero-ctas{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .hero-ctas .btn,
+  .hero-ctas .btn-ghost{
+    width: 100%;
+    padding: 12px 14px;
+  }
+
+  /* espaçamento do bloco hero inteiro (abaixo do header fixo + notch) */
+  .hero-inner{
+    padding: calc(12vh + env(safe-area-inset-top) + 36px) 16px 8vh;
+  }
+
+  /* marquee mais discreto para não poluir */
+  .marquee{
+    height: 30px;
+    margin-top: 22px;
+    font-size: .9rem;
+    opacity: .9;
+  }
+}
