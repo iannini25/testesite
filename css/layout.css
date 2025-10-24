@@ -1,0 +1,677 @@
+/* =============================
+   LAYOUT.GERAL
+   ============================= */
+
+/* Header (apenas marca) */
+.site-header.brand-only {
+    position: fixed;
+    /* sempre visível no topo */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(10, 10, 10, 0.55);
+    /* translúcido */
+    /* efeito vidro */
+}
+
+.site-header.brand-only .brand img {
+    height: 36px;
+}
+
+/* IMPORTANTE: o nav antigo foi removido.
+   Garanta que não existam regras de .site-nav/.nav-toggle ativas neste arquivo. */
+
+
+/* =============================
+   HERO
+   ============================= */
+
+.hero {
+    position: relative;
+    min-height: 88vh;
+    display: grid;
+    place-items: end;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .35;
+    transform: scale(1.08);
+    /* leve zoom p/ parallax */
+}
+
+.hero-inner {
+    position: relative;
+    width: 100%;
+    max-width: var(--max);
+    margin-inline: auto;
+    padding: calc(20vh + 40px) 24px 10vh;
+    /* +40px por causa do header fixo */
+}
+
+.hero-sub {
+    max-width: 720px;
+    color: var(--muted);
+    margin: 12px 0 24px;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ===== MARQUEE estável (substitui o antigo) ===== */
+.marquee {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-top: 56px;
+    height: 38px;
+    /* altura fixa para não quebrar */
+    display: flex;
+    align-items: center;
+    color: #9a9a9a;
+    white-space: nowrap;
+}
+
+.marquee__track {
+    display: flex;
+    gap: 24px;
+    will-change: transform;
+    animation: mc-marquee 18s linear infinite;
+}
+
+.marquee span {
+    padding-right: 24px;
+    white-space: nowrap;
+}
+
+.marquee:hover .marquee__track {
+    animation-play-state: paused;
+}
+
+@keyframes mc-marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+    /* com 2 spans idênticos, -50% emenda perfeito */
+}
+
+
+/* =============================
+   GRIDS & MEDIA
+   ============================= */
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 32px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.media img {
+    border-radius: 16px;
+    border: 1px solid var(--line);
+}
+
+@media (max-width: 920px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =============================
+   CARDS
+   ============================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #0c0c0c;
+    transition: transform .25s var(--ease);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.card .thumb {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.card .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card .meta {
+    font-size: .85rem;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+}
+
+@media (max-width: 920px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =============================
+   QUOTE
+   ============================= */
+
+.quote {
+    position: relative;
+    text-align: center;
+}
+
+.bg-grain {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .08;
+}
+
+
+/* =============================
+   APPS
+   ============================= */
+
+.apps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.app {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #0d0d0d;
+}
+
+.app img {
+    width: 22px;
+}
+
+@media (max-width: 700px) {
+    .apps-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* linhas separadas */
+.apps-grid.apps-main {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    margin-top: 18px;
+}
+
+.apps-grid.apps-cortes {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    margin-top: 10px;
+}
+
+/* divisor com label "Cortes (plataformas oficiais)" */
+.apps-split {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 8px;
+}
+
+.apps-split::before,
+.apps-split::after {
+    content: "";
+    flex: 1 1 auto;
+    border-top: 1px solid var(--line);
+    opacity: .9;
+}
+
+.apps-label {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: .95rem;
+}
+
+/* responsivo */
+@media (max-width: 700px) {
+
+    .apps-grid.apps-main,
+    .apps-grid.apps-cortes {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =============================
+   HOSTS
+   ============================= */
+
+.host {
+    text-align: center;
+}
+
+.host img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    margin: 0 auto 12px;
+}
+
+.host p {
+    color: var(--muted);
+}
+
+/* Versão solo (apresentador) */
+.host--solo {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.host--solo img {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 12px;
+}
+
+
+/* =============================
+   CTA
+   ============================= */
+
+.cta {
+    text-align: center;
+}
+
+.cta .cta-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+
+/* =============================
+   FOOTER
+   ============================= */
+
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 36px 0;
+    background: #0b0b0b;
+}
+
+/* deixa o conteúdo do footer em linha e permite .social ir pra direita */
+.site-footer .container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    /* quebra no mobile */
+}
+
+
+.site-footer .brand img {
+    height: 24px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 16px;
+    margin: 12px 0;
+}
+
+.social {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.social img {
+    width: 18px;
+}
+
+
+/* =============================
+   SCROLL PROGRESS BAR
+   ============================= */
+
+.scrollbar {
+    position: fixed;
+    inset: 0 auto auto 0;
+    height: 2px;
+    width: 0%;
+    background: var(--fg);
+    z-index: 50;
+}
+
+
+/* =============================
+   SIDE NAV (NOVO)
+   ============================= */
+
+.side-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 24px;
+    background: rgba(15, 15, 15, 0.55);
+    /* translúcido */
+    border: 1px solid var(--line);
+    backdrop-filter: blur(10px) saturate(120%);
+    /* vidro */
+}
+
+.side-link {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    transition: transform .18s var(--ease), background-color .18s var(--ease), border-color .18s var(--ease);
+    background: rgba(255, 255, 255, 0.02);
+    position: relative;
+}
+
+.side-link img {
+    width: 20px;
+    height: 20px;
+    filter: grayscale(100%);
+}
+
+.side-link:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--line);
+}
+
+.side-link.is-active {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--fg);
+}
+
+/* Tooltip minimal */
+.side-link::after {
+    content: attr(data-tip);
+    position: absolute;
+    right: 56px;
+    top: 50%;
+    transform: translateY(-50%) translateX(8px);
+    white-space: nowrap;
+    background: rgba(15, 15, 15, 0.85);
+    color: var(--fg);
+    border: 1px solid var(--line);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: .85rem;
+    line-height: 1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s var(--ease), transform .15s var(--ease);
+}
+
+.side-link:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Mobile: esconde o menu lateral para não poluir */
+@media (max-width: 920px) {
+    .side-nav {
+        display: none;
+    }
+}
+
+/* ============================
+   RESPONSIVO (LAYOUT)
+   ============================ */
+
+/* <= 1024px */
+@media (max-width: 1024px) {
+
+    /* hero ainda dominante, mas com menos padding superior */
+    .hero-inner {
+        padding: calc(16vh + 40px) 24px 10vh;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    /* sobre: empilha */
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* destaques vira 2 colunas */
+}
+
+/* <= 768px */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 82vh;
+    }
+
+    .hero-inner {
+        padding: calc(14vh + 40px) 20px 9vh;
+    }
+
+    .hero-sub {
+        max-width: 640px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* cards em 1 coluna */
+    .apps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* fallback geral */
+    .apps-grid.apps-main,
+    .apps-grid.apps-cortes {
+        grid-template-columns: 1fr;
+        /* 1 por linha */
+    }
+
+    .app {
+        padding: 16px;
+        border-radius: 10px;
+    }
+
+    .app img {
+        width: 20px;
+    }
+
+    .quote {
+        text-align: left;
+    }
+
+    /* leitura mais natural no mobile */
+    .site-footer .container {
+        gap: 16px;
+        justify-content: flex-start;
+    }
+
+    .footer-links {
+        gap: 12px;
+        margin: 4px 0 0;
+    }
+
+    .social {
+        margin-left: 0;
+    }
+
+    /* vai para baixo da lista */
+}
+
+/* ✅ <= 430px (celular “alvo”) */
+@media (max-width: 430px) {
+
+    /* header fixo com altura enxuta */
+    .site-header.brand-only {
+        padding: 10px 14px;
+        backdrop-filter: blur(10px) saturate(120%);
+    }
+
+    .site-header.brand-only .brand img {
+        height: 28px;
+    }
+
+    /* hero */
+    .hero-bg {
+        opacity: .32;
+        transform: scale(1.06);
+    }
+
+    .hero-inner {
+        padding: calc(13vh + 36px) 16px 8vh;
+    }
+
+    .hero-ctas {
+        gap: 10px;
+    }
+
+    .marquee {
+        height: 32px;
+        margin-top: 40px;
+        font-size: .9rem;
+    }
+
+    /* “Sobre” */
+    .media img {
+        border-radius: 12px;
+    }
+
+    .bullets li {
+        margin: 8px 0;
+    }
+
+    /* cards de destaques */
+    .card {
+        border-radius: 12px;
+    }
+
+    .card .thumb {
+        aspect-ratio: 16/10;
+    }
+
+    /* Apps (players e cortes) — ocupa a largura toda em blocos confortáveis */
+    .apps-grid.apps-main,
+    .apps-grid.apps-cortes {
+        gap: 12px;
+    }
+
+    .app {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    /* host (apenas Túlio) */
+    .host--solo img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .host--solo p {
+        font-size: .98rem;
+    }
+
+    /* CTA final */
+    .cta .cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* Footer */
+    .site-footer {
+        padding: 28px 0;
+    }
+
+    .site-footer .brand img {
+        height: 22px;
+    }
+
+    .social img {
+        width: 20px;
+    }
+
+    /* clique maior */
+}
+
+/* 360px — pequenos refinamentos */
+@media (max-width: 360px) {
+    .hero-inner {
+        padding: calc(12vh + 34px) 14px 7vh;
+    }
+
+    .marquee {
+        height: 30px;
+    }
+}
